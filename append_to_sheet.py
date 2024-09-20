@@ -1,10 +1,7 @@
 import gspread
 import os
-from dotenv import load_dotenv
 import gspread.exceptions
-from datetime import datetime
-
-load_dotenv()
+import streamlit as st
 
 # The keys you wish to retrieve from the .env file
 keys = [
@@ -20,7 +17,7 @@ keys = [
     "client_x509_cert_url",
     "universe_domain"
 ]
-cred = {key: os.getenv(key).replace('\\n', '\n') for key in keys}
+cred = {key: st.secrets[key].replace('\\n', '\n') for key in keys}
 gc = gspread.service_account_from_dict(cred)
 
 
