@@ -36,6 +36,7 @@ Keto special notes..
 6) vegetable.. all green leafy vegetables, salad vegetable, cucumber,tomato, mushroom, capsicum, bell paper,
  cherry tomato, cauliflower, cabbage, broccoli, French beans, ladies finger, pumpkin, raddish, carrot
 """
+
 diet_plans = """FAT LOSS VEGETARIAN LCD: A vegetarian fat-loss diet with balanced options for breakfast, lunch, 
 evening meal, and dinner focused on low-carbohydrate intake.\n\n FAT LOSS Eggatarian LCD: An egg-based fat-loss diet 
 plan offering choices between vegetarian and egg-based meals with low-carb options for all meals.\n\n FAT LOSS 
@@ -57,6 +58,7 @@ model = genai.GenerativeModel(model_name="gemini-1.5-flash")
 
 with open("plan.json", 'r') as f:
     plans = json.load(f)
+st.image("assets/B2B-Logo.png")
 
 st.title("Match-a🍵 - The Diet Plan Recommender")
 
@@ -106,19 +108,20 @@ def fill_form():
 
 
 def recommendations():
-    """Prompt AI and gemini will retrieve and rank dishes"""
+    """Prompt AI and gemini will provide the diet plan"""
     _, status, dietary_preference = fill_form()
-
-    if dietary_preference == "Keto Non-vegetarian" or dietary_preference == "Keto Vegetarian":
-        st.write(keto_notes)
-    else:
-        st.write(spnotes)
+    keto = False
+    if dietary_preference == "Keto Non Vegetarian Plan" or dietary_preference == "Keto Vegetarian Plan":
+        keto = True
     if dietary_preference != "":
+
         res = model.generate_content([f"Restructure {plans[dietary_preference]}"
                                       f" properly with suitable bold headings etc"])
         st.write(res.text)
-
-
+        if not keto:
+            st.write(spnotes)
+        else:
+            st.write(keto_notes)
 
 
 recommendations()
