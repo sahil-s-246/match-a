@@ -108,17 +108,17 @@ def fill_form():
 def recommendations():
     """Prompt AI and gemini will retrieve and rank dishes"""
     _, status, dietary_preference = fill_form()
-    notes = ""
+
     if dietary_preference == "Keto Non-vegetarian" or dietary_preference == "Keto Vegetarian":
-        notes = keto_notes
+        st.write(keto_notes)
     else:
-        notes = spnotes
+        st.write(spnotes)
     if dietary_preference != "":
         res = model.generate_content([f"Restructure {plans[dietary_preference]}"
                                       f" properly with suitable bold headings etc"])
         st.write(res.text)
 
-        st.write(notes)
+
 
 
 recommendations()
