@@ -110,8 +110,10 @@ def recommendations():
     notes = spnotes if dietary_preference not in ["Keto Non-vegetarian", "Keto Vegetarian"] else keto_notes
     if dietary_preference != "":
         res = model.generate_content([f"Restructure {plans[dietary_preference]}"
-                                      f" properly with suitable bold headings etc. add the following notes {notes}"])
+                                      f" properly with suitable bold headings etc"])
         st.write(res.text)
+
+        st.write(notes)
 
 
 recommendations()
