@@ -25,7 +25,3 @@ def append_to_sheet(val):
     sheet = gc.open_by_key(os.getenv("s_url")).sheet1
     sheet.append_row(val)
 
-
-
-
-

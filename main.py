@@ -5,6 +5,37 @@ import random
 from datetime import datetime
 from append_to_sheet import append_to_sheet
 
+spnotes = """
+special Notes..
+1) Avoid fruits after 1st meal
+2) In between workout include at least 1lit salt lime or agal water
+3)Can include without sugar green tea or black tea or black coffee
+4) water.. 4-5lit/day
+
+List To Include..
+All green leafy vegetables like palak, methi, amarnath,( aalu) colocasia, chawali
+bhindi, capsicum, dudhi, turai, parwar, Karla, baigan, gavar, papdi, olives, onions, broccoli, mushroom
+salad.. cucumber, tomato, radish (mula), cabbage, lettuce, celery,
+Almonds, walnuts, 
+
+Avoid List...
+corn flakes, maida, potato/peas/ carrot stuffed paratha 
+poha,idli,dosa,white rice,sheera
+fruits salad, banana, mango, dates, chiku
+white sugar, honey, jaggary, icecream, chocolate, gellies, jam 
+bakery products
+dalda, margarine, safflower, sunflower oil
+"""
+keto_notes = """
+Keto special notes..
+1) Have salt lime water 1lit/day
+2) use sugar free like stevia to take care of sweet tooth
+3) In between snacking can include Avocado or its juice or pumpkin seeds 
+4) You can make roties with almond flour and flaxseed powder 
+5) fruits.. strawberry or raspberry or blueberry or avacado or cherries
+6) vegetable.. all green leafy vegetables, salad vegetable, cucumber,tomato, mushroom, capsicum, bell paper,
+ cherry tomato, cauliflower, cabbage, broccoli, French beans, ladies finger, pumpkin, raddish, carrot
+"""
 diet_plans = """FAT LOSS VEGETARIAN LCD: A vegetarian fat-loss diet with balanced options for breakfast, lunch, 
 evening meal, and dinner focused on low-carbohydrate intake.\n\n FAT LOSS Eggatarian LCD: An egg-based fat-loss diet 
 plan offering choices between vegetarian and egg-based meals with low-carb options for all meals.\n\n FAT LOSS 
@@ -76,8 +107,10 @@ def fill_form():
 def recommendations():
     """Prompt AI and gemini will retrieve and rank dishes"""
     _, status, dietary_preference = fill_form()
+    notes = spnotes if dietary_preference not in ["Keto Non-vegetarian", "Keto Vegetarian"] else keto_notes
     if dietary_preference != "":
-        res = model.generate_content([f"Restructure {plans[dietary_preference]} properly with suitabl bold headings etc."])
+        res = model.generate_content([f"Restructure {plans[dietary_preference]}"
+                                      f" properly with suitable bold headings etc. add the following notes {notes}"])
         st.write(res.text)
 
 
