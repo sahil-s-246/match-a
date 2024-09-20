@@ -63,10 +63,11 @@ st.title("Match-a🍵 - The Diet Plan Recommender")
 info = st.button("💡Info about the diet plans❓")
 if info:
     st.info(diet_plans)
-    
+
 rand = st.button("I'm Feeling Lucky✨")
 if rand:
     st.write(plans[random.choice(list(plans.keys()))])
+
 
 def fill_form():
     # Define options for select boxes
@@ -81,14 +82,14 @@ def fill_form():
                            'Weight Gain Vegetarian', 'Weight Gain Eggetarian']
 
     # Create the form
-    with st.form(key='user_form', border=False,clear_on_submit=True):
+    with st.form(key='user_form', border=False, clear_on_submit=True):
         name = st.text_input(label='Name')
         age = st.number_input("age", min_value=15, max_value=120)
         gender = st.selectbox("gender", genders, index=None)
         weight = st.number_input("Weight (kg)", min_value=40.0, max_value=200.0)
         height = st.number_input("Height (cm)", min_value=100, max_value=250)
         activity_level = st.selectbox("Activity Level", activity_levels, index=None)
-        dietary_preference = st.selectbox("Dietary Preference", dietary_preferences, index=None)
+        dietary_preference = st.radio("Dietary Preference", dietary_preferences, index=None)
         health_goal = st.selectbox("Health Goal", health_goals, index=None)
 
         submit_button = st.form_submit_button(label='Submit')
@@ -107,7 +108,11 @@ def fill_form():
 def recommendations():
     """Prompt AI and gemini will retrieve and rank dishes"""
     _, status, dietary_preference = fill_form()
-    notes = spnotes if dietary_preference not in ["Keto Non-vegetarian", "Keto Vegetarian"] else keto_notes
+    notes = ""
+    if dietary_preference == "Keto Non-vegetarian" or dietary_preference == "Keto Vegetarian":
+        notes = keto_notes
+    else:
+        notes = spnotes
     if dietary_preference != "":
         res = model.generate_content([f"Restructure {plans[dietary_preference]}"
                                       f" properly with suitable bold headings etc"])
@@ -117,4 +122,3 @@ def recommendations():
 
 
 recommendations()
-
