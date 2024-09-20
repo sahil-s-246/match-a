@@ -1,0 +1,81 @@
+{
+  "FAT LOSS VEGETARIAN LCD": {
+    "type": "Diet 1",
+    "Breakfast": "Millet dosa 1 or millet flakes 5tbsp or oats 5tbsp or tomato omelet 1 or Kanji 1 glass or chilla 1 no + paneer 100gm or curd 300gm or milk 300ml or whey protein 1 scoop (optional)",
+    "Lunch": "1 jawar/bajara/ragi roti or 1k brown rice or 1k hand pounded rice + 1k veggies cooked + 1k salad + paneer 100gm or 300gm curd (buttermilk) + 1tbsp coconut oil",
+    "Evening Meal": "300ml milk + 1bsp coconut oil",
+    "Dinner": "1k veggies cooked + 1k salad + 100gm paneer or 300gm curd (buttermilk) or 1 scoop whey (optional) + 1tbsp coconut oil"
+  },
+  "FAT LOSS EGGETARIAN LCD": {
+    "type": "Diet 2",
+    "Breakfast": "Millet dosa 1 or millet flakes 5tbsp or oats 5tbsp or tomato omelet 1 or Kanji 1 glass or chilla 1 no + paneer 100gm or curd 300gm or milk 300ml or whey protein 1 scoop (optional) or 2 whole eggs",
+    "Lunch": "1 jawar/bajara/ragi roti or 1k brown rice or 1k hand pounded rice + 1k veggies cooked + 1k salad + paneer 100gm or 300gm curd (buttermilk) or 2 whole eggs + 1tbsp coconut oil",
+    "Evening Meal": "300ml milk + 1bsp coconut oil",
+    "Dinner": "1k veggies cooked + 1k salad + 100gm paneer or 300gm curd (buttermilk) or 1 scoop whey (optional) or 3 whole eggs + 1tbsp coconut oil"
+  },
+  "FAT LOSS NON VEGETARIAN LCD": {
+    "type": "Diet 3",
+    "Breakfast": "Millet dosa 1 or millet flakes 5tbsp or oats 5tbsp or tomato omelet 1 or Kanji 1 glass or chilla 1 no + paneer 100gm or curd 300gm or milk 300ml or whey protein 1 scoop (optional) or 2 whole eggs",
+    "Lunch": "1 jawar/bajara/ragi roti or 1k brown rice or 1k hand pounded rice + 1k veggies cooked + 1k salad + 100gm paneer/chicken/fish/mutton or 300gm curd (buttermilk) or 2 whole eggs + 1tbsp coconut oil",
+    "Evening Meal": "300ml milk + 1bsp coconut oil",
+    "Dinner": "1k veggies cooked + 1k salad + 100gm paneer/chicken/fish/mutton or 300gm curd (buttermilk) or 1 scoop whey (optional) or 3 whole eggs + 1tbsp coconut oil"
+  },
+  "FAT LOSS VEGETARIAN 15 days": {
+    "type": "Diet 4",
+    "Lunch": "1k veggies cooked + 1k salad + paneer 100gm or 300gm curd (buttermilk) + 1tbsp coconut oil",
+    "Dinner": "1k veggies cooked + 1k salad + 100gm paneer or 300gm curd (buttermilk) or 1 scoop whey (optional) + 1tbsp coconut oil"
+  },
+  "FAT LOSS EGGETARIAN 15 days": {
+    "type": "Diet 5",
+    "Lunch": "1k veggies cooked + 1k salad + paneer 100gm or 300gm curd (buttermilk) or 2 whole eggs + 1tbsp coconut oil",
+    "Dinner": "1k veggies cooked + 1k salad + 100gm paneer or 300gm curd (buttermilk) or 1 scoop whey (optional) or 3 whole eggs + 1tbsp coconut oil"
+  },
+  "FAT LOSS NON VEGETARIAN 15 days": {
+    "type": "Diet 6",
+    "Lunch": "1k veggies cooked + 1k salad + 100gm paneer/chicken/fish/mutton or 300gm curd (buttermilk) or 2 whole eggs + 1tbsp coconut oil",
+    "Dinner": "1k veggies cooked + 1k salad + 100gm paneer/chicken/fish/mutton or 300gm curd (buttermilk) or 1 scoop whey (optional) or 3 whole eggs + 1tbsp coconut oil"
+  },
+  "Keto Non Vegetarian Plan": {
+    "type": "Diet 7",
+    "Early Morning": "coffee with water + cream (optional) or butter + 2 tsp coffee, followed by 1 tbsp (15ml) coconut oil",
+    "Breakfast": "3 whole eggs or 100gm paneer + cheese (optional) cooked in 1tbsp ghee or coconut oil + 100gm assorted vegetables, 1 multivitamin tablet (1 cap for a month)",
+    "Lunch": "stir fried vegetables or salad or soup + 150gm chicken/meat/fish cooked in 1tbsp ghee, butter, or coconut oil. Once a week, lentil soup is allowed. End meal with buttermilk/jaljeera/coconut water/salted lime water",
+    "Evening": "coffee with butter or coconut oil",
+    "Dinner": "150gm chicken/meat/fish or 150gm paneer + stir fried vegetables or salad or soup cooked in 1tbsp coconut oil, ghee, or butter",
+    "Bedtime": "1 cap of Magnesium Glycinate (500mg) from HealthyHey or Simply Nutra for a month"
+  },
+  "Keto Vegetarian Plan": {
+    "type": "Diet 8",
+    "Early Morning": "coffee with water + cream (optional) or butter + 2 tsp coffee, followed by 1 tbsp (15ml) coconut oil",
+    "Breakfast": "100gm paneer + cheese (optional) cooked in 1 tbsp ghee or coconut oil + 100gm assorted vegetables, 1 multivitamin tablet (1 cap for a month)",
+    "Lunch": "stir fried vegetables or salad or soup + 150gm paneer cooked in 1 tbsp ghee, butter, or coconut oil. Once a week, lentil soup is allowed. End meal with buttermilk/jaljeera/coconut water/salted lime water",
+    "Evening": "coffee with butter or coconut oil",
+    "Dinner": "150gm paneer or 1 scoop whey (optional) + stir fried vegetables or salad or soup cooked in 1 tbsp coconut oil, ghee, or butter",
+    "Bedtime": "1 cap of Magnesium Glycinate (500mg) from HealthyHey or Simply Nutra for a month"
+  },
+  "Weight Gain Non Vegetarian": {
+    "type": "Diet 9",
+    "Breakfast": "1 big Thalpith or 2 Paratha or 7 tbsp Oats or 5 tbsp millet flakes or 6 Idlis + 3 whole eggs or 1 scoop weight gainer (optional) or 100gm boneless chicken + 2 tbsp Coconut Oil",
+    "Mid Meal": "2 fruits + 300ml milk or 1 scoop weight gainer (optional) + handful of dry fruits + 2 tbsp Coconut Oil",
+    "Lunch": "2 Chapati or Bhakari + 1k vegetable + 1k salad + 100gm Paneer or 1 bowl curd or 100gm Chicken or Fish or Mutton + 1 tbsp Coconut Oil",
+    "Evening": "300ml milk or 100gm paneer or 1 scoop weight gainer (optional) + handful of dry fruits + 2 fruits or 5 tbsp Oats or millet flakes + 1 tbsp Coconut Oil + 1 cheese cube",
+    "Dinner": "2 Chapati or Bhakari + 1k vegetable + 1k salad + 100gm Paneer or curd (buttermilk) or 100gm Chicken or Fish or Mutton + 1 tbsp Coconut Oil"
+  },
+  "Weight Gain Vegetarian": {
+    "type": "Diet 10",
+    "Breakfast": "1 big Thalpith or 2 Paratha or 7 tbsp Oats or 5 tbsp millet flakes or 6 Idlis + 1 scoop weight gainer (optional) or 100gm paneer + 2 tbsp Coconut Oil",
+    "Mid Meal": "2 fruits + 300ml milk or 1 scoop weight gainer (optional) + handful of dry fruits + 2 tbsp Coconut Oil",
+    "Lunch": "2 Chapati or Bhakari + 1k vegetable + 1k dal + 1k rice + 1k salad + 100gm Paneer or 1 bowl curd (buttermilk) + 2 tbsp Coconut Oil",
+    "Evening": "300ml milk or 100gm paneer or 1 scoop weight gainer (optional) + handful of dry fruits + 2 fruits or 5 tbsp Oats or millet flakes + 1 tbsp Coconut Oil + 1 cheese cube",
+    "Dinner": "2 Chapati or Bhakari + 1k vegetable + 1k dal + 1k rice + 100gm paneer or curd (buttermilk) + 2 tbsp Coconut Oil"
+  },
+  "Weight Gain Eggetarian": {
+    "type": "Diet 11",
+    "Breakfast": "1 big Thalpith or 2 Paratha or 7 tbsp Oats or 5 tbsp millet flakes or 6 Idlis + 1 scoop weight gainer (optional) or 100gm paneer or 3 whole eggs + 2 tbsp Coconut Oil",
+    "Mid Meal": "2 fruits + 300ml milk or 1 scoop weight gainer (optional) + handful of dry fruits + 2 tbsp Coconut Oil",
+    "Lunch": "2 Chapati or Bhakari + 1k vegetable + 1k dal + 1k rice + 1k salad + 100gm Paneer or 1 bowl curd (buttermilk) or 3 whole eggs + 2 tbsp Coconut Oil",
+    "Evening": "300ml milk or 100gm paneer or 1 scoop weight gainer (optional) + handful of dry fruits + 2 fruits or 5 tbsp Oats or millet flakes + 1 tbsp Coconut Oil + 1 cheese cube",
+    "Dinner": "2 Chapati or Bhakari + 1k vegetable + 1k dal + 1k rice + 100gm paneer or curd (buttermilk) or 3 whole eggs + 2 tbsp Coconut Oil"
+  }
+}
+
