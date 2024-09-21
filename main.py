@@ -4,6 +4,31 @@ import google.generativeai as genai
 import random
 from datetime import datetime
 from append_to_sheet import append_to_sheet
+import tempfile
+from fpdf import FPDF
+
+
+def create_pdf(content):
+    """Function to create PDF """
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
+
+    for line in content.split("\n"):
+        pdf.cell(0, 5, txt=line, ln=True, align='L')
+
+    # Create a temporary file
+    temp_pdf = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
+    pdf.output(temp_pdf.name)
+
+    return temp_pdf.name
+
+
+def clear_temp_file(file_path):
+    """Function to clear the contents of the file"""
+    with open(file_path, 'w') as temp_file:
+        temp_file.write('')  # Overwrite with an empty string
+
 
 spnotes = """
 special Notes..
@@ -69,7 +94,7 @@ if info:
 rand = st.button("I'm Feeling Lucky✨")
 if rand:
     st.write(plans[random.choice(list(plans.keys()))])
-
+st.warning("Please wait for a second after submission")
 
 def fill_form():
     # Define options for select boxes
@@ -110,18 +135,34 @@ def fill_form():
 def recommendations():
     """Prompt AI and gemini will provide the diet plan"""
     _, status, dietary_preference = fill_form()
+    notes = ""
     keto = False
     if dietary_preference == "Keto Non Vegetarian Plan" or dietary_preference == "Keto Vegetarian Plan":
         keto = True
     if dietary_preference != "":
+        with st.spinner("Loading..."):
+            res = model.generate_content([f"Restructure {plans[dietary_preference]}"
+                                          f" properly with suitable format in plain text, not md"
+                                          f"Split the meal content as per nutrtion for a balanced meal and list them"
+                                          f" separately"
+                                          f"For eg: Curry can be a balanced diet, but milk in combination with cereal"
+                                          f" covers carbs from cereal, protein from milk etc. and don't put extra notes,"
+                                          f" just the plan would suffice"])
+            st.write(res.text)
+            if not keto:
+                notes = spnotes
+            else:
+                notes = keto_notes
+            result = f"{res.text}\n\n{notes}"
+            temp = create_pdf(result)
+            with open(temp, "rb") as file:
+                download = st.download_button(label="Download Diet Plan PDF",
+                                              data=file,
+                                              file_name="diet_plan.pdf",
+                                              mime="application/pdf")
+            if download:
+                clear_temp_file(temp)
 
-        res = model.generate_content([f"Restructure {plans[dietary_preference]}"
-                                      f" properly with suitable bold headings etc"])
-        st.write(res.text)
-        if not keto:
-            st.write(spnotes)
-        else:
-            st.write(keto_notes)
 
-
-recommendations()
+if __name__ == "__main__":
+    recommendations()

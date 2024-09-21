@@ -2,3 +2,4 @@ streamlit
 google
 google-generativeai
 gspread
+fpdf
