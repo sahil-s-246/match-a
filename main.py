@@ -91,9 +91,6 @@ info = st.button("💡Info about the diet plans❓")
 if info:
     st.info(diet_plans)
 
-rand = st.button("I'm Feeling Lucky✨")
-if rand:
-    st.write(plans[random.choice(list(plans.keys()))])
 st.warning("Please wait for a second after submission")
 
 def fill_form():
@@ -110,31 +107,51 @@ def fill_form():
 
     # Create the form
     with st.form(key='user_form', border=False, clear_on_submit=True):
+        # Basic Information
         name = st.text_input(label='Name')
-        age = st.number_input("age", min_value=15, max_value=120)
-        gender = st.selectbox("gender", genders, index=None)
-        weight = st.number_input("Weight (kg)", min_value=40.0, max_value=200.0)
-        height = st.number_input("Height (cm)", min_value=100, max_value=250)
-        activity_level = st.selectbox("Activity Level", activity_levels, index=None)
-        dietary_preference = st.radio("Dietary Preference", dietary_preferences, index=None)
-        health_goal = st.selectbox("Health Goal", health_goals, index=None)
+        email = st.text_input(label='Email')
+        country = st.text_input(label='Country')
+        contact = st.text_input(label='Contact')
 
+        # Physical Attributes
+        height = st.number_input("Height (cm)", min_value=100, max_value=250)
+        weight = st.number_input("Weight (kg)", min_value=40.0, max_value=200.0)
+        age = st.number_input("Age", min_value=15, max_value=120)
+        gender = st.selectbox("Gender", genders, index=None)
+
+        # Health and Lifestyle
+        health_condition = st.text_input("Any Health Condition")
+        lifestyle = st.selectbox("Lifestyle", ["Sedentary", "Moderately Active", "Very Active"])
+        physical_activity = st.radio("Are you active in physical exercises?", ["Yes", "No"],index=1)
+        if physical_activity == "Yes":
+            activities = st.text_area("Please Mention the Activities")
+            activity_days = st.number_input("How many days a week do you perform these activities?", min_value=0,
+                                            max_value=7)
+
+        # Dietary Preferences
+        dietary_preference = st.radio("Dietary Preference", dietary_preferences, index=None)
+
+        # Health Goals
+        health_goal = st.selectbox("Target for Joining", ["Weight Loss", "Weight Gain", "Maintenance"], index=None)
+        eating_timings = st.text_area("Current Eating Pattern Timings (e.g., Breakfast: 8 AM, Lunch: 1 PM, etc.)")
+
+        # Submit Button
         submit_button = st.form_submit_button(label='Submit')
 
     if submit_button:
         # Concatenate values into a space-separated string
         status = True
-        user_info = (f"{name} {age} {gender} {weight} {height} {activity_level} {dietary_preference} {health_goal} "
+        user_info = (f"{name} {age} {gender} {weight} {height} {dietary_preference} {health_goal} "
                      f"{str(datetime.now())}")
         append_to_sheet(user_info.split(" "))
-        return user_info, status, dietary_preference
+        return user_info, status, dietary_preference, eating_timings
     else:
-        return "", status, ""
+        return "", status, "", ""
 
 
 def recommendations():
     """Prompt AI and gemini will provide the diet plan"""
-    _, status, dietary_preference = fill_form()
+    _, status, dietary_preference, eating_timings = fill_form()
     notes = ""
     keto = False
     if dietary_preference == "Keto Non Vegetarian Plan" or dietary_preference == "Keto Vegetarian Plan":
@@ -142,12 +159,16 @@ def recommendations():
     if dietary_preference != "":
         with st.spinner("Loading..."):
             res = model.generate_content([f"Restructure {plans[dietary_preference]}"
-                                          f" properly with suitable format in plain text, not md"
+                                          f" properly. Please provide a response in plain text without formatting "
+                                          f"alpha numeric as far as possible"
                                           f"Split the meal content as per nutrtion for a balanced meal and list them"
                                           f" separately"
                                           f"For eg: Curry can be a balanced diet, but milk in combination with cereal"
                                           f" covers carbs from cereal, protein from milk etc. and don't put extra notes,"
-                                          f" just the plan would suffice"])
+                                          f" just the plan would suffice. Make a proper schedule according to "
+                                          f"{eating_timings} and include the time in it."
+                                          f" Don't use markdown only plain text"
+                                          ])
             st.write(res.text)
             if not keto:
                 notes = spnotes
