@@ -5,33 +5,37 @@ import random
 from datetime import datetime
 from append_to_sheet import append_to_sheet
 import tempfile
-from fpdf import FPDF
+from markdown_pdf import MarkdownPdf, Section
+import os
 
 
 def create_pdf(content):
-    """Function to create PDF """
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Arial", size=12)
+    pdf = MarkdownPdf(toc_level=1)
 
-    for line in content.split("\n"):
-        pdf.cell(0, 5, txt=line, ln=True, align='L')
+    pdf.add_section(Section(f"{content}"))
+    pdf.meta["title"] = "Diet Plan"
+    pdf.meta["author"] = "Sahil S"
+    temp_dir = tempfile.mkdtemp()
+    temp_pdf_path = os.path.join(temp_dir, 'output.pdf')
 
-    # Create a temporary file
-    temp_pdf = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
-    pdf.output(temp_pdf.name)
+    pdf.save(temp_pdf_path)
 
-    return temp_pdf.name
+    return temp_pdf_path
 
 
-def clear_temp_file(file_path):
-    """Function to clear the contents of the file"""
-    with open(file_path, 'w') as temp_file:
-        temp_file.write('')  # Overwrite with an empty string
+def cleanup_pdf(pdf_path):
+    try:
+        if os.path.exists(pdf_path):
+            os.remove(pdf_path)
+            return True
+    except Exception as e:
+        print(f"Error deleting temporary PDF: {e}")
+        return False
 
 
 spnotes = """
-special Notes..
+---
+SPECIAL NOTES
 1) Avoid fruits after 1st meal
 2) In between workout include at least 1lit salt lime or agal water
 3)Can include without sugar green tea or black tea or black coffee
@@ -52,7 +56,9 @@ bakery products
 dalda, margarine, safflower, sunflower oil
 """
 keto_notes = """
-Keto special notes..
+ ---
+
+KETO Notes
 1) Have salt lime water 1lit/day
 2) use sugar free like stevia to take care of sweet tooth
 3) In between snacking can include Avocado or its juice or pumpkin seeds 
@@ -62,10 +68,10 @@ Keto special notes..
  cherry tomato, cauliflower, cabbage, broccoli, French beans, ladies finger, pumpkin, raddish, carrot
 """
 
-diet_plans = """FAT LOSS VEGETARIAN LCD: A vegetarian fat-loss diet with balanced options for breakfast, lunch, 
-evening meal, and dinner focused on low-carbohydrate intake.\n\n FAT LOSS Eggatarian LCD: An egg-based fat-loss diet 
+diet_plans = """FAT LOSS VEGETARIAN Low Carb Diet: A vegetarian fat-loss diet with balanced options for breakfast, lunch, 
+evening meal, and dinner focused on low-carbohydrate intake.\n\n FAT LOSS Eggatarian Low Carb Diet: An egg-based fat-loss diet 
 plan offering choices between vegetarian and egg-based meals with low-carb options for all meals.\n\n FAT LOSS 
-Non-vegetarian LCD: A fat-loss diet incorporating lean meats like chicken and fish alongside vegetarian options to 
+Non-vegetarian Low Carb Diet: A fat-loss diet incorporating lean meats like chicken and fish alongside vegetarian options to 
 manage carbohydrate intake.\n\n FAT LOSS VEGETARIAN (15 days): A short-term vegetarian fat-loss plan with minimal meal 
 variety, focusing on cooked veggies, salad, and paneer or curd.\n\n FAT LOSS Eggatarian (15 days): A 15-day eggatarian 
 fat-loss plan emphasizing vegetable and egg-based meals with a focus on healthy fats like coconut oil.\n\n FAT LOSS 
@@ -93,13 +99,14 @@ if info:
 
 st.warning("Please wait for a second after submission")
 
+
 def fill_form():
     # Define options for select boxes
     status = False
     genders = ["Male", "Female", "Other"]
     activity_levels = ["Low", "Moderate", "High", "Active"]
     health_goals = ["Weight Loss", "Muscle Gain", "Weight Maintenance", "Heart Health", "Fat Loss"]
-    dietary_preferences = ['FAT LOSS VEGETARIAN LCD', 'FAT LOSS EGGETARIAN LCD', 'FAT LOSS NON VEGETARIAN LCD',
+    dietary_preferences = ['FAT LOSS VEGETARIAN Low Carb Diet', 'FAT LOSS EGGETARIAN Low Carb Diet', 'FAT LOSS NON VEGETARIAN Low Carb Diet',
                            'FAT LOSS VEGETARIAN 15 days', 'FAT LOSS EGGETARIAN 15 days',
                            'FAT LOSS NON VEGETARIAN 15 days',
                            'Keto Non Vegetarian Plan', 'Keto Vegetarian Plan', 'Weight Gain Non Vegetarian',
@@ -144,45 +151,66 @@ def fill_form():
         user_info = (f"{name} {age} {gender} {weight} {height} {dietary_preference} {health_goal} "
                      f"{str(datetime.now())}")
         append_to_sheet(user_info.split(" "))
-        return user_info, status, dietary_preference, eating_timings
+        user_dict = {
+            "name": name,
+            "age": age,
+            "gender": gender,
+            "weight": weight,
+            "height": height,
+            "dietary_preference": dietary_preference,
+            "health_goal": health_goal,
+            "timestamp": datetime.now().isoformat()
+        }
+        return user_dict, status, dietary_preference, eating_timings
     else:
         return "", status, "", ""
 
 
 def recommendations():
     """Prompt AI and gemini will provide the diet plan"""
-    _, status, dietary_preference, eating_timings = fill_form()
+    user_info, status, dietary_preference, eating_timings = fill_form()
+
     notes = ""
     keto = False
+
     if dietary_preference == "Keto Non Vegetarian Plan" or dietary_preference == "Keto Vegetarian Plan":
         keto = True
     if dietary_preference != "":
         with st.spinner("Loading..."):
-            res = model.generate_content([f"Restructure {plans[dietary_preference]}"
-                                          f" properly. Please provide a response in plain text without formatting "
-                                          f"alpha numeric as far as possible"
-                                          f"Split the meal content as per nutrtion for a balanced meal and list them"
-                                          f" separately"
-                                          f"For eg: Curry can be a balanced diet, but milk in combination with cereal"
-                                          f" covers carbs from cereal, protein from milk etc. and don't put extra notes,"
-                                          f" just the plan would suffice. Make a proper schedule according to "
-                                          f"{eating_timings} and include the time in it."
-                                          f" Don't use markdown only plain text"
-                                          ])
-            st.write(res.text)
+            try:
+                res = model.generate_content([f"Restructure {plans[dietary_preference]}"
+                                              f" properly. Please provide a response in plain text without formatting "
+                                              f"alpha numeric as far as possible"
+                                              f"Split the meal content as per nutrtion for a balanced meal and list them"
+                                              f" separately"
+                                              f"For eg: Curry can be a balanced diet, but milk in combination with cereal"
+                                              f" covers carbs from cereal, protein from milk etc. and don't put extra notes,"
+                                              f" just the plan would suffice. Make a proper schedule according to "
+                                              f"{eating_timings} and include the time in it."
+                                              f" Don't use markdown only plain text"
+                                              ])
+                st.write(res.text)
+            except KeyError:
+                st.error("Please fill the dietary preference before submitting the form")
+                return
             if not keto:
                 notes = spnotes
             else:
                 notes = keto_notes
             result = f"{res.text}\n\n{notes}"
             temp = create_pdf(result)
+            if user_info["name"] is None:
+                user_info["name"] = "diet_plan"
             with open(temp, "rb") as file:
                 download = st.download_button(label="Download Diet Plan PDF",
                                               data=file,
-                                              file_name="diet_plan.pdf",
+                                              file_name=f"{user_info["name"]}.pdf",
                                               mime="application/pdf")
             if download:
-                clear_temp_file(temp)
+                cleanup_pdf(temp)
+
+    else:
+        st.warning("Please fill choose a diet plan and fill all the details as well")
 
 
 if __name__ == "__main__":

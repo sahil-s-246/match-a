@@ -1,19 +1,19 @@
 {
-  "FAT LOSS VEGETARIAN LCD": {
+  "FAT LOSS VEGETARIAN Low Carb Diet": {
     "type": "Diet 1",
     "Breakfast": "Millet dosa 1 or millet flakes 5tbsp or oats 5tbsp or tomato omelet 1 or Kanji 1 glass or chilla 1 no + paneer 100gm or curd 300gm or milk 300ml or whey protein 1 scoop (optional)",
     "Lunch": "1 jawar/bajara/ragi roti or 1k brown rice or 1k hand pounded rice + 1k veggies cooked + 1k salad + paneer 100gm or 300gm curd (buttermilk) + 1tbsp coconut oil",
     "Evening Meal": "300ml milk + 1bsp coconut oil",
     "Dinner": "1k veggies cooked + 1k salad + 100gm paneer or 300gm curd (buttermilk) or 1 scoop whey (optional) + 1tbsp coconut oil"
   },
-  "FAT LOSS EGGETARIAN LCD": {
+  "FAT LOSS EGGETARIAN Low Carb Diet": {
     "type": "Diet 2",
     "Breakfast": "Millet dosa 1 or millet flakes 5tbsp or oats 5tbsp or tomato omelet 1 or Kanji 1 glass or chilla 1 no + paneer 100gm or curd 300gm or milk 300ml or whey protein 1 scoop (optional) or 2 whole eggs",
     "Lunch": "1 jawar/bajara/ragi roti or 1k brown rice or 1k hand pounded rice + 1k veggies cooked + 1k salad + paneer 100gm or 300gm curd (buttermilk) or 2 whole eggs + 1tbsp coconut oil",
     "Evening Meal": "300ml milk + 1bsp coconut oil",
     "Dinner": "1k veggies cooked + 1k salad + 100gm paneer or 300gm curd (buttermilk) or 1 scoop whey (optional) or 3 whole eggs + 1tbsp coconut oil"
   },
-  "FAT LOSS NON VEGETARIAN LCD": {
+  "FAT LOSS NON VEGETARIAN Low Carb Diet": {
     "type": "Diet 3",
     "Breakfast": "Millet dosa 1 or millet flakes 5tbsp or oats 5tbsp or tomato omelet 1 or Kanji 1 glass or chilla 1 no + paneer 100gm or curd 300gm or milk 300ml or whey protein 1 scoop (optional) or 2 whole eggs",
     "Lunch": "1 jawar/bajara/ragi roti or 1k brown rice or 1k hand pounded rice + 1k veggies cooked + 1k salad + 100gm paneer/chicken/fish/mutton or 300gm curd (buttermilk) or 2 whole eggs + 1tbsp coconut oil",
