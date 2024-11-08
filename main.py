@@ -7,7 +7,7 @@ from append_to_sheet import append_to_sheet
 import tempfile
 from markdown_pdf import MarkdownPdf, Section
 import os
-
+from google.api_core.exceptions import ResourceExhausted
 
 def create_pdf(content):
     pdf = MarkdownPdf(toc_level=1)
@@ -193,6 +193,10 @@ def recommendations():
             except KeyError:
                 st.error("Please fill the dietary preference before submitting the form")
                 return
+            except ResourceExhausted:
+                st.error("A lot of people are making requests at the moment. Please try in a few minute")
+            except:
+                st.error("Something went wrong. Please try again")
             if not keto:
                 notes = spnotes
             else:
