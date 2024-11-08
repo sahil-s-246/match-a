@@ -103,7 +103,7 @@ st.warning("Please wait for a second after submission")
 def fill_form():
     # Define options for select boxes
     status = False
-    genders = ["Male", "Female", "Other"]
+    genders = ["Male", "Female"]
     activity_levels = ["Low", "Moderate", "High", "Active"]
     health_goals = ["Weight Loss", "Muscle Gain", "Weight Maintenance", "Heart Health", "Fat Loss"]
     dietary_preferences = ['FAT LOSS VEGETARIAN Low Carb Diet', 'FAT LOSS EGGETARIAN Low Carb Diet', 'FAT LOSS NON VEGETARIAN Low Carb Diet',
